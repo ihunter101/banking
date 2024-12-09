@@ -7,18 +7,18 @@ declare type SearchParamProps = {
 
 // ========================================
 
-declare type SignUpParams = {
-  firstName: string;
-  lastName: string;
-  address1: string;
-  city: string;
-  state: string;
-  postalCode: string;
-  dateOfBirth: string;
-  ssn: string;
+declare type SignUpParams = {//adding the question marks makes them optional
+  firstName?: string;
+  lastName?: string;
+  address1?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  dateOfBirth?: string;
+  ssn?: string;
   email: string;
   password: string;
-  contactNumber: string;
+  contactNumber?: string;
 };
 
 declare type LoginUser = {
@@ -34,6 +34,7 @@ declare type User = {
   dwollaCustomerId: string;
   firstName: string;
   lastName: string;
+  name: string
   address1: string;
   city: string;
   state: string;
@@ -212,6 +213,7 @@ declare interface TotalBalanceBoxProps {
 
 declare interface FooterProps {
   user: User;
+  type: "mobile" | "desktop";
 }
 
 declare interface RightSidebarProps {

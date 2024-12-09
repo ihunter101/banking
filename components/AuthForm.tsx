@@ -24,7 +24,7 @@ import  CustomInput  from './CustomInput'
 import { authFormSchema } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { signIn, signUp } from '@/lib/actions/useractions'
+import { getLoggedInUser, signIn, signUp } from '@/lib/actions/useractions'
 
 
 
@@ -39,13 +39,14 @@ import { signIn, signUp } from '@/lib/actions/useractions'
  * @param {{type: string}} - The type of form to render. Can be 'sign-in' or 'sign-up'
  * @returns {JSX.Element} - The rendered form
  */
-const AuthForm = ({ type } : { type:string }) => {
+const AuthForm =  ({ type } : { type:string }) => {
   const router = useRouter();
   console.log('Type:', type);
 
 
     const [user, setUser] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    
 
     {/*we had to tunr authFormSchema into a function 
       to pass the type (sign in or sign out) to 
@@ -71,16 +72,16 @@ const AuthForm = ({ type } : { type:string }) => {
         try {
          
           if (type === 'sign-up') {
-            const newUser = await signUp(data)
+            const newUser = await signUp(data)//this only takes the email and password as input since this is what being accepted in signUp function in useractions.ts
             setUser(newUser)
           }
             
           if(type === 'sign-in') {
-            const response = await signIn({
-            email : data.email,
-            password : data.password
+           const response = await signIn({
+           email : data.email,
+          password : data.password
           })
-            if (response) router.push('/')// if the response is vakid then oush the user to the homePage
+          if (response) router.push('/')// if the response is vakid then oush the user to the homePage
         };
           
         } catch (error) {

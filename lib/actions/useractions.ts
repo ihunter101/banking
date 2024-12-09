@@ -4,10 +4,16 @@ import { ID } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
 import { parseStringify } from "../utils";
+import { parse } from "path";
 
-export const signIn = async () => {
+export const signIn = async ({email, password} : signInProps) => {
 
     try {
+      const { account } = await createAdminClient();
+      const response = await account.createEmailPasswordSession(email, password);
+
+      return parseStringify(response);
+
         
     } catch (error) {
         
@@ -56,12 +62,31 @@ export const signUp = async (userData : SignUpParams) => {
 export async function getLoggedInUser() {
     try {
       const { account } = await createSessionClient();
-      return await account.get();
+
+      const user = await account.get();
+      return parseStringify(user);
     } catch (error) {
       return null;
     }
   };
 
+
+  /**
+   * Deletes the current session and removes the appwrite session cookie.
+   * @returns {boolean} true if successful, null if not.
+   */
+  export const logoutAccount = async () => {
+    try {
+      const { account } = await createSessionClient();
+      
+      (await cookies()).delete("appwrite-session");
+
+      await account.deleteSession('current');
+      return true;
+    } catch (error) {
+      return null;
+    }
+  };
   
   
   
