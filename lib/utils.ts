@@ -2,6 +2,7 @@
 import { type ClassValue, clsx } from "clsx";
 import qs from "query-string";
 import { twMerge } from "tailwind-merge";
+import { z } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -193,3 +194,27 @@ export const getTransactionStatus = (date: Date) => {
 
   return date > twoDaysAgo ? "Processing" : "Success";
 };
+
+/**
+ * authFormSchema is a function that accepts a type (sing in or up) andreturns a Zod 
+ * schema for the form data required for authentication. If the type is 'sign-in', 
+ * it only requires email and password. If the type is 'sign-up', it requires additional
+ * fields such as first name, last name, address, and date of birth.
+ * @param {string} type - The type of the form. Can be 'sign-in' or 'sign-up'
+ * @returns {z.ZodObject} - The schema for the form data
+ */
+export const authFormSchema = (type: string) => z.object ({
+  //sign up
+  firstName: type === 'sign-in' ? z.string().optional() : z.string().min(3),
+  lastName: type === 'sign-in' ? z.string().optional() : z.string().min(3),
+  address1: type === 'sign-in' ? z.string().optional() : z.string().max(50),
+  city: type === 'sign-in' ? z.string().optional() : z.string().min(3),
+  postalCode: type === 'sign-in' ? z.string().optional() : z.string().min(3).max(6),
+  dateOfBirth: type === 'sign-in' ? z.string().optional() : z.string().min(3),
+  contactNumber: type === 'sign-in' ? z.string().optional() : z.string().min(3),
+  ssn: z.string().optional(), //social security number is not applicable if not owned or applicable if otherwise 
+  state: z.string().optional(),
+  //email and password are required for both sign in and sign up
+  email: z.string().email(),
+  password: z.string().min(8),
+})
