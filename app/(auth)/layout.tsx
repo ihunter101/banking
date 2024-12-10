@@ -7,13 +7,15 @@ export default function RootLayout({
 }>) {
   return (
     <main className="flex min-h-screen w-full justify-between font-inter">
+      <div className="flex flex-col items-center justify-center w-full max-w-md p-4">
         {children}
-        <div className='auth-asset'>
+      </div>
+        <div className='auth-asset '>
             <div>
                 <Image src='/icons/auth-image.svg'
                 alt= 'Auth Image'
-                width={200}
-                height={200}/>
+                width={500}
+                height={500}/>
             </div>
         </div>
         </main>

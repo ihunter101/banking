@@ -15,7 +15,7 @@ const SignUp =  async () => {
   
 
   return (
-    <section className='flex-center size fsull max-sm-6'>
+    <section className='flex-center size fsull max-sm:px-6'>
       <AuthForm type="sign-up" />
     </section>
   )

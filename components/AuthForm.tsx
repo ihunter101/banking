@@ -141,7 +141,7 @@ const AuthForm =  ({ type } : { type:string }) => {
                                <CustomInput 
                              control={form.control}
                              name='firstName'
-                             label='Fisrt Name'
+                             label='First Name'
                              placeholder='Enter your first name'
                             />
                             <CustomInput 
@@ -241,12 +241,12 @@ const AuthForm =  ({ type } : { type:string }) => {
             </Form>
             <footer className='flex justify-center gap-1'>
 
-                    <p className='text-16 font-normal text-gray-600'> 
+                    <p className='text-14 font-normal text-gray-600'> 
                       {type === 'sign-in' ? "Don't have an account?":
                       'Already Have an account?'} </p>
                       <Link href={type === 'sign-in' ? '/sign-up' : '/sign-in'}
                       className='form-link'>
-                        {type === 'sign-in' ? 'sign Up' : 'sign In'}
+                        {type === 'sign-in' ? 'Sign Up' : 'Sign In'}
                       </Link>
             </footer>
             </>
