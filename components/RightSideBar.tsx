@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import BankCard from './BankCard';
 
+
 const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
     return (
         <aside className="right-sidebar">
@@ -10,7 +11,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
                 <div className='profile-banner'/>
                 <div className='profile'>
                     <div className='profile-img'>
-                        <span className='text-5xl text-bold text-blue-500'>{user.name[0]}</span>
+                        <div className='text-5xl text-bold text-blue-500'>{user.name[0]}</div>
 
                     </div>
                         <div className='profile-details'>
@@ -44,7 +45,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
                                <BankCard
                                key={banks[0].$id}
                                account={banks[0]}
-                               userName={ `${user.firstName} ${user.lastName}` }
+                               userName={ user.name }
                                showBalance= {false}
                                 />
                             </div>
@@ -53,7 +54,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
                                     <BankCard 
                                     key={banks[1].$id}
                                     account={banks[1]}
-                                    userName={ `${user.firstName} ${user.lastName}` }
+                                    userName={  user.name  }
                                     showBalance= {false}
                                     />
                                 </div>

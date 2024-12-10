@@ -1,4 +1,6 @@
 'use client'
+
+
 import Link from 'next/link'
 import React, { useState } from 'react'
 import Image from 'next/image'
@@ -79,10 +81,10 @@ const AuthForm =  ({ type } : { type:string }) => {
           if(type === 'sign-in') {
            const response = await signIn({
            email : data.email,
-          password : data.password
+           password : data.password
           })
           if (response) router.push('/')// if the response is vakid then oush the user to the homePage
-        };
+        };console.log('working')
           
         } catch (error) {
           console.log(error)
@@ -96,7 +98,7 @@ const AuthForm =  ({ type } : { type:string }) => {
 
   return (
     <section className='auth-form'>
-        <header className='flex flex-col gap-5  md:gap-8'>
+        <header className='flex flex-col gap-5 md:gap-8'>
              <Link href='/' className=' flex cursor-pointer items-center gap-1' >
                  <Image 
                     src='/icons/logo.svg'
